@@ -1,6 +1,9 @@
 import { config } from "dotenv";
 const envData = config();
-console.log('app envData :',envData);
+// console.log('app envData :',envData);
+console.log("Environment Variables Loaded:");
+console.log("MONGO_URI:", process.env.MONGO_URI ? "LOADED" : "NOT LOADED");
+console.log("JWT_SECRET:", process.env.JWT_SECRET ? "LOADED" : "NOT LOADED");
 
 import e, { json, urlencoded, static as static_ } from "express";
 import cookieParser from "cookie-parser";
