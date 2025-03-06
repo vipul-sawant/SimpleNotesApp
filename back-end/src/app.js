@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 const envData = config();
-// console.log('app envData :',envData);
+console.log('app envData :',envData);
 
 import e, { json, urlencoded, static as static_ } from "express";
 import cookieParser from "cookie-parser";
