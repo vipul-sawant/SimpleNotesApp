@@ -39,7 +39,7 @@ const App = () => {
 				element: <ProtectedRoutes> <NavbarComponent /> <UpdateNote /> </ProtectedRoutes>
 			}
 		]
-	}]);
+	}], { basename: "/SimpleNotesApp" });
 
 	const notes = useSelector(state=>state?.notes || {});
 	const auth = useSelector(state=>state?.auth || {});
