@@ -3,7 +3,7 @@ name: Deploy Vite App
 on:
   push:
     branches:
-      - main  # Deploy when code is pushed to the main branch
+      - main  # Deploy when pushed to main branch
 
 permissions:
   contents: write  # Required for deployment
@@ -19,17 +19,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22  # Use Node.js 22
+          node-version: 22  # Use latest stable Node.js version
 
       - name: Install Dependencies
         run: npm install
 
+      # ✅ Debug GitHub Secrets - Print (Will be masked as ***)
       - name: Debug GitHub Secrets
         run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
 
+      # ✅ Write the Secret into an .env file
       - name: Create .env File
-        run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
+        run: |
+          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
+          cat .env  # Check if it is written correctly
 
+      # ✅ Pass it explicitly during build
       - name: Build Project
         run: npm run build
         env:
