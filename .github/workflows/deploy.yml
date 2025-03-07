@@ -3,7 +3,7 @@ name: Deploy Vite App
 on:
   push:
     branches:
-      - main # Change if your default branch is different
+      - main  # Change if your default branch is different
 
 permissions:
   contents: write  # Required for deployment
@@ -24,15 +24,16 @@ jobs:
         run: npm install
 
       - name: Debug Environment Variables
-        run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
+        run: echo "🔍 VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
 
-      - name: Set Environment Variable
-        run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" >> $GITHUB_ENV
+      - name: Create .env File
+        run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
+
+      - name: Verify .env File
+        run: cat .env  # Check if .env file contains the variable
 
       - name: Build Project
         run: npm run build
-        env:
-          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }} # Inject environment variable
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
