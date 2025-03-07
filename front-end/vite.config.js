@@ -1,16 +1,16 @@
-import { defineConfig, loadEnv  } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
-export default defineConfig(({mode})=>{
-	const env = loadEnv(mode, process.cwd(), "");
-	console.log("VITE_BACKEND_URL from env:", env.VITE_BACKEND_URL); // Debug
-	return {
-		
-		plugins: [react()],
-		define: {
-			"import.meta.env.VITE_BACKEND_URL": JSON.stringify(env.VITE_BACKEND_URL),
-		  },
-		base: "/SimpleNotesApp/", // Must match the GitHub repo name
-	}
-})
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+
+  console.log("✅ Loaded VITE_BACKEND_URL:", env.VITE_BACKEND_URL); // Debugging
+
+  return {
+    plugins: [react()],
+    define: {
+      "import.meta.env.VITE_BACKEND_URL": JSON.stringify(env.VITE_BACKEND_URL),
+    },
+	base:"/SimpleNotesApp/"
+  };
+});

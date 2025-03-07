@@ -3,14 +3,15 @@ name: Deploy Vite App
 on:
   push:
     branches:
-      - main
+      - main  # Deploy when code is pushed to the main branch
 
 permissions:
-  contents: write
+  contents: write  # Required for deployment
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -18,21 +19,21 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.12.0
+          node-version: 22  # Use Node.js 22
 
       - name: Install Dependencies
         run: npm install
 
-      # ✅ Inject VITE_BACKEND_URL into a .env file
+      - name: Debug GitHub Secrets
+        run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
+
       - name: Create .env File
         run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
 
-      # ✅ Debug: Check if .env is created properly
-      - name: Verify .env File
-        run: cat .env
-
       - name: Build Project
         run: npm run build
+        env:
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
