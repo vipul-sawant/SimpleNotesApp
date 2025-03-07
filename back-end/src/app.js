@@ -1,6 +1,14 @@
 import { config } from "dotenv";
 const envData = config();
-console.log('app envData :',envData);
+
+const mode = process.env.NODE_ENV;
+console.log("Current Mode:", mode);
+
+if (mode === "development") {
+    
+    console.log('server envData :',envData);
+}
+
 console.log("Environment Variables Loaded:");
 console.log("MONGO_URI:", process.env.MONGODB_URI ? "LOADED" : "NOT LOADED");
 console.log("JWT_SECRET:", process.env.ACCESS_TOKEN_SECRET ? "LOADED" : "NOT LOADED");

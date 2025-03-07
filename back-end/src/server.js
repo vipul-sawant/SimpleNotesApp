@@ -1,6 +1,13 @@
 import { config } from "dotenv";
 const envData = config();
-// console.log('server envData :',envData);
+
+const mode = process.env.NODE_ENV;
+console.log("Current Mode:", mode);
+
+if (mode === "development") {
+    
+    console.log('server envData :',envData);
+}
 
 import app  from "./app.js";
 import connectToDB  from "./db/index.js";
@@ -15,7 +22,7 @@ const startServer = async () => {
         }
 
         app.listen(port, () => {
-            // console.log(`✅ Server running on http://localhost:${port}`);
+            console.log(`✅ Server running on http://localhost:${port}`);
         });
     } catch (error) {
         if (error instanceof ApiError) {
