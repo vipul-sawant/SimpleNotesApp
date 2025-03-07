@@ -37,4 +37,6 @@ jobs:
         with:
           branch: gh-pages  # Will create gh-pages if missing
           folder: dist  # Deploys the build output
-          clean: true  # Removes old files to prevent conflicts
+          clean: true  # Ensures a fresh deploy
+          force: true  # Force push if needed
+# Removes old files to prevent conflicts
