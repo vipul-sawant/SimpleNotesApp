@@ -1,44 +1,33 @@
-name: Deploy Vite App
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Deploy when pushed to main branch
-
-permissions:
-  contents: write  # Required for deployment
+      - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: 22  # Use latest stable Node.js version
+          node-version: 18
 
-      - name: Install Dependencies
-        run: npm install
+      - name: Install dependencies
+        run: npm install  # or yarn install
 
-      # ✅ Debug GitHub Secrets - Print (Will be masked as ***)
-      - name: Debug GitHub Secrets
-        run: echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}"
-
-      # ✅ Write the Secret into an .env file
-      - name: Create .env File
+      - name: Inject environment variables
         run: |
-          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" > .env
-          cat .env  # Check if it is written correctly
+          echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> .env
+          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" >> .env
 
-      # ✅ Pass it explicitly during build
-      - name: Build Project
-        run: npm run build
-        env:
-          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+      - name: Build project
+        run: npm run build  # or yarn build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
