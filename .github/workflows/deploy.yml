@@ -3,7 +3,10 @@ name: Deploy Vite App
 on:
   push:
     branches:
-      - main
+      - main # Change if your default branch is different
+
+permissions:
+  contents: write  # Required for deployment
 
 jobs:
   deploy:
@@ -11,6 +14,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4  # Use latest Node.js setup
+        with:
+          node-version: 22.12.0  # Updated to Node.js 22.12.0
 
       - name: Install Dependencies
         run: npm install
@@ -20,6 +28,8 @@ jobs:
 
       - name: Build Project
         run: npm run build
+        env:
+          VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}  # Inject environment variable
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
