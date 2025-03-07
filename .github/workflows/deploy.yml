@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 1  # Ensures all repo files are fetched
+
+      - name: Verify package.json exists
+        run: ls -la front-end  # List files inside front-end to check if package.json exists
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -22,21 +27,23 @@ jobs:
           node-version: latest  # Always use the latest Node.js version
 
       - name: Install dependencies
-        run: npm install  # Or yarn install
+        run: |
+          cd front-end
+          npm install  # Or yarn install
 
       - name: Inject environment variables
         run: |
-          echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" >> .env
-          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" >> .env
+          echo "VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}" >> front-end/.env
 
       - name: Build project
-        run: npm run build
+        run: |
+          cd front-end
+          npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # Will create gh-pages if missing
-          folder: dist  # Deploys the build output
+          folder: front-end/dist  # Deploys the build output
           clean: true  # Ensures a fresh deploy
-          force: true  # Force push if needed
-# Removes old files to prevent conflicts
+          force: true  # Force push in case of conflicts
