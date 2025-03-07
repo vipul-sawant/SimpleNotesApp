@@ -40,6 +40,13 @@ app.use(urlencoded(urlEncodedOptions));
 app.use(static_("public"));
 app.use(cookieParser());
 
+app.use((req, _, next) => {
+    const fullURL = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+    console.log(`🛠 Request received: ${fullURL}`);
+    next();
+});
+
+
 import AuthRoutes from "./routes/auth.routes.js";
 import NoteRoutes from "./routes/note.routes.js";
 
