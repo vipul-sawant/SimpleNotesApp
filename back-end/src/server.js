@@ -22,7 +22,7 @@ const startServer = async () => {
         }
 
         app.listen(port, () => {
-            console.log(`✅ Server running on http://localhost:${port}`);
+            console.log(`✅ Server running on ${process.env.BASE_URL +  port}`);
         });
     } catch (error) {
         if (error instanceof ApiError) {
