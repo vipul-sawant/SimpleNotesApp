@@ -40,12 +40,12 @@ app.use(urlencoded(urlEncodedOptions));
 app.use(static_("public"));
 app.use(cookieParser());
 
+let fullURL;
 app.use((req, _, next) => {
-    const fullURL = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+    fullURL = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
     console.log(`🛠 Request received: ${fullURL}`);
     next();
 });
-
 
 import AuthRoutes from "./routes/auth.routes.js";
 import NoteRoutes from "./routes/note.routes.js";
@@ -54,3 +54,5 @@ app.use('/api/v1/auth', AuthRoutes);
 app.use('/api/v1/notes', NoteRoutes);
 
 export default app;
+
+export { fullURL };

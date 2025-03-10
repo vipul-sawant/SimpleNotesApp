@@ -9,7 +9,7 @@ if (mode === "development") {
     console.log('server envData :',envData);
 }
 
-import app  from "./app.js";
+import app, { fullURL }  from "./app.js";
 import connectToDB  from "./db/index.js";
 import ApiError from "./utils/ApiError.js";
 
@@ -22,7 +22,7 @@ const startServer = async () => {
         }
 
         app.listen(port, () => {
-            console.log(`✅ Server running on ${process.env.BASE_URL +  port}`);
+            console.log(`✅ Server running on ${fullURL + port}`);
         });
     } catch (error) {
         if (error instanceof ApiError) {
