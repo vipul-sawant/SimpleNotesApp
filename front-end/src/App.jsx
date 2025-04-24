@@ -1,5 +1,5 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './App.css'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import './App.css';
 import Layout from './Layout';
 import UserRegister from './pages/User/UserRegister.jsx';
 import UserLogin from './pages/User/UserLogin.jsx';

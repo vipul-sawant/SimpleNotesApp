@@ -1,2 +1,2 @@
-db_credentials.txt
-.env
+files
+.env.development

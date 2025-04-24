@@ -17,15 +17,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 
-import "./UserForm.component.css";
+// import "./UserForm.component.css";
 
 const UserForm = ({fieldsArray, operation}) => {
 
 	const [ formfields, setFormFields ] = useState(fieldsArray);
     const schema = buildSchema(formfields, 'user');
 	
-	const notes = useSelector(state=>state?.notes || {});
-	const auth = useSelector(state=>state?.auth || {});
+	// const notes = useSelector(state=>state?.notes || {});
+	// const auth = useSelector(state=>state?.auth || {});
 
     const { isLoggedIn = false, user={}, error:authError = null } = useSelector(state=>state?.auth || {});
 	const { error:notesError = null } = useSelector(state=>state?.notes || {});
@@ -65,22 +65,22 @@ const UserForm = ({fieldsArray, operation}) => {
 			} else if (operation === "login") {
 				
 				userAction = await dispatch(loginUser(data));
-			}
-			
-			// ✅ If user exists, fetch chats & contacts
-			if (userAction?.error) {
 
-				alert(userAction.payload);
-			} else {
+				// ✅ If user exists, fetch chats & contacts
+				if (userAction?.error) {
 
-				const notesAction = await dispatch(fetchNotes());
+					alert(userAction.payload);
+				} else {
 
-				if (notesAction?.error) {
-					
-					alert(notesAction.payload);
+					const notesAction = await dispatch(fetchNotes());
+
+					if (notesAction?.error) {
+						
+						alert(notesAction.payload);
+					}
 				}
 			}
-
+			
 			setRedirect(true);
 		} catch (error) {
 			
@@ -98,16 +98,18 @@ const UserForm = ({fieldsArray, operation}) => {
 		console.log('user :', user);
 		if (isLoggedIn && redirect) {
 			
-			// alert("Logged In as ", user);
 			navigate(`/users/${user.username}/dashboard`, replace);
+		} else if (!isLoggedIn && redirect) {
+			
+			navigate("/user/login");
 		}
 	}, [isLoggedIn, redirect]);
 
-	useEffect(()=>{
+	// useEffect(()=>{
 
-		console.log('notes :', notes);
-		console.log('auth :', auth);
-	}, [auth, notes]);
+	// 	console.log('notes :', notes);
+	// 	console.log('auth :', auth);
+	// }, [auth, notes]);
 
 	return (
 		<>
@@ -136,7 +138,7 @@ const UserForm = ({fieldsArray, operation}) => {
 						</Form.Group>
 					))}
 
-					<Button type="submit" className="btn">{ operation} </Button>
+					<Button type="submit" className="my-btn">{ operation} </Button>
 				</Form>
 			</>
 	)

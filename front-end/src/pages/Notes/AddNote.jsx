@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import NoteForm from "../../components/Notes/NoteForm.component.jsx";
 import { fields } from "../../utils/form/fields/notes/notes.js";
-import "./NotePage.css";
+// import "./NotePage.css";
 import { Button } from "react-bootstrap";
 const AddNote = () => {
 

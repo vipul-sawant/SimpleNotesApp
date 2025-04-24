@@ -2,15 +2,6 @@
 
 A full-stack **Notes App** that allows users to securely create, edit, and manage personal notes with authentication. It ensures **proper session handling**, preventing unauthorized access while keeping users logged in until their session expires.  
 
-## 🚀 Live Demo  
-🔗 **Frontend:** [https://vipul-sawant.github.io/SimpleNotesApp](#)  
-<!-- 🔗 **Backend:** [Render](#)   -->
-
-## 🛠 Tech Stack  
-- **Frontend:** React.js, Redux Toolkit, React Bootstrap, React Router, React Hook Form, Yup, Axios  
-- **Backend:** Node.js, Express.js, MongoDB (Mongoose), JWT, Bcrypt, CORS, Cookie Parser  
-- **Hosting:** GitHub Pages (Frontend), Render (Backend), MongoDB Atlas (Database)  
-
 ## ✨ Features  
 ✅ **User Authentication** (JWT-based login/register with bcrypt encryption)  
 ✅ **Session Persistence** (Keeps users logged in until session expires)  
@@ -21,6 +12,15 @@ A full-stack **Notes App** that allows users to securely create, edit, and manag
 ✅ **Form Validation** (Prevents empty fields & redundant updates)  
 ✅ **Delete Confirmation** (Alerts before deleting a note)  
 ✅ **Secure API** (Protected routes, backend validation, and CORS handling)  
+
+## 🛠 Tech Stack  
+- **Frontend:** React.js, Redux Toolkit, React Bootstrap, React Router, React Hook Form, Yup, Axios  
+- **Backend:** Node.js, Express.js, MongoDB (Mongoose), JWT, Bcrypt, CORS, Cookie Parser  
+- **Hosting:** GitHub Pages (Frontend), Render (Backend), MongoDB Atlas (Database)  
+
+
+## 🚀 Live Demo  
+🔗 [https://vipul-sawant.github.io/SimpleNotesApp](https://vipul-sawant.github.io/SimpleNotesApp)
 
 ## 📸 Screenshots  
 *(Add a screenshot of your app here)*  

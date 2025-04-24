@@ -6,7 +6,8 @@ import { Outlet, useNavigate, replace, useLocation } from "react-router-dom";
 
 const Layout = () => {
     const navigate = useNavigate();
-    // const location = useLocation();
+    const location = useLocation();
+    const { pathname } = location;
     const { user = {}, isLoggedIn = false } = useSelector(state=>state?.auth || {});
 
     useEffect(()=>{
@@ -18,7 +19,7 @@ const Layout = () => {
         } else if (!isLoggedIn)  {
             navigate(`/user/login`, replace);
         }
-    }, [isLoggedIn])
+    }, [isLoggedIn, pathname]);
   
     return (
         <>
